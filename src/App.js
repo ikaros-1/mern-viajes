@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import Header from './components/Header';
+import Fotter from './components/Buttom-home';
+import Gocities from './components/Buttom-cities'
+import Link from './components/GoLoginRegister'
+import 'bootstrap/dist/css/bootstrap.css';
+import './css/App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <div className="App d-flex flex-column m-2 w-100 align-items-center">
+        <Header></Header>
+        <Gocities></Gocities>
+        <Link></Link>
+        <Fotter className="mt-2" url="/home"></Fotter>
+      </div>
+    );
+  }
 }
 
 export default App;
