@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import home from '../image/home.png'
+import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
-import '../css/App.css';
+import './Home.css';
 
 class Buttom extends Component {
     constructor(props) {
@@ -13,11 +13,11 @@ class Buttom extends Component {
     render() {
         if (this.url === "/home")
             return (
-                <a href=" " disabled><img src={home} alt="" className="homeimg"></img></a>
+                <img src={"/image/home.png"} alt="" className="homeimg"></img>
             );
         else
             return (
-                <a href="./home"><img src={home} alt="" className="homeimg"></img></a>
+                <Link to="/"><img src={"/image/home.png"} alt="" className="homeimg"></img></Link>
             );
     }
 }

@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
-import Header from './components/Header';
-import Fotter from './components/Buttom-home';
-import Gocities from './components/Buttom-cities'
-import Link from './components/GoLoginRegister'
+import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/App.css';
+import Home from './components/Home/Home';
 
 class App extends Component {
   render() {
     return (
-      <div className="App d-flex flex-column m-2 w-100 align-items-center">
-        <Header></Header>
-        <Gocities></Gocities>
-        <Link></Link>
-        <Fotter className="mt-2" url="/home"></Fotter>
-      </div>
+      <Router>
+        <Switch>
+          <Route path="/">
+            <Home></Home>
+          </Route>
+          <Route path="/login">
+          
+          </Route>
+          <Route path="/register">
+          </Route>
+        </Switch>
+      </Router>
     );
   }
 }
