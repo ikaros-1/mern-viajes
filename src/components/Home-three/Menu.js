@@ -5,7 +5,7 @@ export default class Menu extends Component{
     render(){
         return(
             <div>
-                <img src="/image/list.png"></img>
+                <img className="perfil" src="/image/list.png" alt=""></img>
             </div>
         );
     }

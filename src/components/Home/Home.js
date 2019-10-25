@@ -1,6 +1,6 @@
 import React,{Component} from 'react';
 import Header from './Header';
-import Fotter from './Buttom-home';
+import Fotter from './Footer';
 import Gocities from './Buttom-cities'
 import GoLoginRegister from './GoLoginRegister'
 import './Home.css';
@@ -11,7 +11,7 @@ export default class Home extends Component{
 
     render(){
         return(
-            <div className="App d-flex flex-column w-100 align-items-center">
+            <div className="App d-flex flex-column w-100 align-items-center container">
                 <Header></Header>
                 <Gocities></Gocities>
                 <GoLoginRegister></GoLoginRegister>

@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import './Home.css';
 
-class Buttom extends Component {
+class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -22,4 +22,4 @@ class Buttom extends Component {
     }
 }
 
-export default Buttom;
+export default Footer;
