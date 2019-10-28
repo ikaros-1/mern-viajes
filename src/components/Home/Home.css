@@ -29,12 +29,48 @@
   .homeimg{
     width: 10%;
     height: 10%;
+    
   }
   
   h5{
     font-size: 18px;
   }
 
-  .carousel {
-    height: 20%;
+  .carousel{
+    padding-bottom: 50px;
+  }
+
+  .carousel-control-prev, .carousel-control-next{
+    bottom: 13px;
+    top: none;
+  } 
+
+  .carousel-indicators .active{
+    border-top: none;
+    border-bottom:none;
+    border-radius: 50%;
+    border-color: black;
+    border-style:solid;
+    width: 5px;
+    height: 5px;
+  }
+  .carousel-control-next-icon{
+    background-image: url('/image/next-arrow.png') !important;
+  }
+  .carousel-control-prev-icon{
+    background-image: url('/image/arrow-back.png') !important;
+  }
+
+  .carousel-control-next-icon{
+    background-image: url('/image/next-arrow.png') !important;
+  }
+
+  .carousel-indicators li{
+    border-top: none;
+    border-bottom:none;
+    border-radius: 50%;
+    border-color: gray;
+    border-style:solid;
+    width: 5px;
+    height: 5px;
   }

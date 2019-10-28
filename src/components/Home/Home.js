@@ -14,7 +14,7 @@ export default class Home extends Component{
                 <Header></Header>
                 <Gocities></Gocities>
                 
-                <Fotter className="mt-2" url="/home"></Fotter>
+                <Fotter></Fotter>
             </div>
         );
     }

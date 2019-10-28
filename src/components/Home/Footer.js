@@ -23,37 +23,34 @@ class Footer extends Component {
   }
 
   render() {
-    return (
-      <div className="bg-secondary w-100">
-        <span>Popular MYtineraries</span>
-        <Carousel >
-          <Carousel.Item>
-            <div>
-              hola
+    var cities=['5d6f4a3c82f7f.jpg','Chicago-USA.jpg','descarga.jpg','Hyderabad.jpg','inglaterra.jpg','London-.jpg','Los-Angeles-USA.jpg','lwx_singapore_skyline_100519_10.jpg','Moscow-Russia.jpg','New-York-USA.jpg','Osaka-Japan.jpg','Paris-France.jpg']
+    var items=()=>{
+      var carousel=[]
+        for(var i=0;i<4;i++){
+        carousel.push(<Carousel.Item>
+        <div className="d-flex flex-column p-2">
+          <div className="w-100 pb-2">
+          <img className="w-50 pr-2" src={"/image/"+cities[i*4]} alt={cities[(i*4)]}></img>
+          <img className="w-50 pl-2" src={"/image/"+cities[(i*4)+1]} alt={cities[(i*4)+1]}></img>
           </div>
-            
-          </Carousel.Item>
-          <Carousel.Item>
-            <div>
-              adios
+          <div className="w-100 pt-2">
+          <img className="w-50 pr-2" src={"/image/"+cities[(i*4)+2]} alt={cities[(i*4)+2]}></img>
+          <img className="w-50 pl-2" src={"/image/"+cities[(i*4)+3]} alt={cities[(i*4)+3]}></img>
           </div>
-            
-          </Carousel.Item>
-          <Carousel.Item>
-            <div>
-              chau
-          </div>
-            
-          </Carousel.Item>
-          <Carousel.Item>
-            <div>
-              chau
-          </div>
-            
-          </Carousel.Item>
-        </Carousel>
-        {//<IndicadorCarrousel cambiarIndex={this.cambiarIndex.bind(this)} cambiarDireccion={this.cambiarDireccion.bind(this)} index={this.state.index}></IndicadorCarrousel>
+        </div>
+        </Carousel.Item>)
         }
+      return carousel;
+    }
+  
+    
+    return (
+      <div className="w-100">
+        <span>Popular MYtineraries</span>
+        <Carousel>
+          {items()}
+        </Carousel>
+        
       </div>
     );
   }
@@ -61,7 +58,7 @@ class Footer extends Component {
 }
 
 export default Footer;
-
+/*{
 class IndicadorCarrousel extends Component {
   constructor(props) {
     super(props);
@@ -89,4 +86,4 @@ class IndicadorCarrousel extends Component {
       </div>
     )
   }
-}
+}}*/
