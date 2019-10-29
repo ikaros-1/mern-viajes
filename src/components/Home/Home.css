@@ -42,7 +42,7 @@
 
   .carousel-control-prev, .carousel-control-next{
     bottom: 13px;
-    top: none;
+    top: auto;
   } 
 
   .carousel-indicators .active{
@@ -51,6 +51,7 @@
     border-radius: 50%;
     border-color: black;
     border-style:solid;
+    background-color: black;
     width: 5px;
     height: 5px;
   }

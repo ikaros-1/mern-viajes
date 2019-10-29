@@ -12,8 +12,8 @@ class Header extends Component{
         <Popover id="popover-basic">
           <Popover.Content>
             <div className="d-flex flex-column">
-              <Link><span>Create account</span></Link>
-              <Link><span>Log in</span></Link>
+              <Link to="/register"><span>Create account</span></Link>
+              <Link to="/login"><span>Log in</span></Link>
             </div>
           </Popover.Content>
         </Popover>
@@ -22,7 +22,7 @@ class Header extends Component{
         return(
             <div>
               <div className="d-flex flex-row justify-content-between mr-3 ml-3 mt-3 mb-4">
-                <OverlayTrigger trigger="click" placement="buttom" overlay={popover}>
+                <OverlayTrigger trigger="click" placement="bottom-start" overlay={popover}>
                   <img className="homeimg" src="/image/user.png" alt=""></img>
                 </OverlayTrigger>
                 <img className="homeimg" src="/image/list.png" alt=""></img>

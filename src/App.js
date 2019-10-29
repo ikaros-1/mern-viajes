@@ -17,6 +17,9 @@ class App extends Component {
           </Route>
           <Route path="/register">
           </Route>
+          <Route path="/cities">
+          
+          </Route>
         </Switch>
       </Router>
     );

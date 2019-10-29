@@ -3,6 +3,7 @@ import { Carousel } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.css';
 import './Home.css';
 
+
 class Footer extends Component {
   constructor() {
     super();
@@ -23,19 +24,20 @@ class Footer extends Component {
   }
 
   render() {
-    var cities=['5d6f4a3c82f7f.jpg','Chicago-USA.jpg','descarga.jpg','Hyderabad.jpg','inglaterra.jpg','London-.jpg','Los-Angeles-USA.jpg','lwx_singapore_skyline_100519_10.jpg','Moscow-Russia.jpg','New-York-USA.jpg','Osaka-Japan.jpg','Paris-France.jpg']
+    var cities=['5d6f4a3c82f7f.jpg','Chicago-USA.jpg','descarga.jpg','Hyderabad.jpg','inglaterra.jpg','London-.jpg','Los-Angeles-USA.jpg','lwx_singapore_skyline_100519_10.jpg','Moscow-Russia.jpg','New-York-USA.jpg','Osaka-Japan.jpg','Paris-France.jpg','paris.jpg','seoul.jpg','Seoul-South-Korea.jpg','Shanghai-China-Top-Famous-Richest-Cities-in-The-World-2017.jpg','Tokyo-Japan-Top-Most-Popular-Richest-Cities-in-The-World-2018.jpg']
+    
     var items=()=>{
       var carousel=[]
         for(var i=0;i<4;i++){
-        carousel.push(<Carousel.Item>
-        <div className="d-flex flex-column p-2">
+        carousel.push(<Carousel.Item key={i}>
+        <div  className="d-flex flex-column p-2">
           <div className="w-100 pb-2">
-          <img className="w-50 pr-2" src={"/image/"+cities[i*4]} alt={cities[(i*4)]}></img>
-          <img className="w-50 pl-2" src={"/image/"+cities[(i*4)+1]} alt={cities[(i*4)+1]}></img>
+          <img className="w-50 pr-2 imageCarrousel" src={"./image/"+cities[i*4]} alt={cities[(i*4)]}></img>
+          <img className="w-50 pl-2 imageCarrousel" src={"./image/"+cities[(i*4)+1]} alt={cities[(i*4)+1]}></img>
           </div>
           <div className="w-100 pt-2">
-          <img className="w-50 pr-2" src={"/image/"+cities[(i*4)+2]} alt={cities[(i*4)+2]}></img>
-          <img className="w-50 pl-2" src={"/image/"+cities[(i*4)+3]} alt={cities[(i*4)+3]}></img>
+          <img className="w-50 pr-2 imageCarrousel" src={"./image/"+cities[(i*4)+2]} alt={cities[(i*4)+2]}></img>
+          <img className="w-50 pl-2 imageCarrousel" src={"./image/"+cities[(i*4)+3]} alt={cities[(i*4)+3]}></img>
           </div>
         </div>
         </Carousel.Item>)
