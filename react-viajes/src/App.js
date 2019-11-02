@@ -3,25 +3,30 @@ import {BrowserRouter as Router,Switch,Route} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.css';
 import './css/App.css';
 import Home from './components/Home/Home';
+import Cities from './components/Cities/Cities';
+import { Provider } from "react-redux";
+import store from "./store";
 
 class App extends Component {
   render() {
     return (
-      <Router>
-        <Switch>
-          <Route path="/">
-            <Home></Home>
-          </Route>
-          <Route path="/login">
+      <Provider store={store}>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Home></Home>
+            </Route>
+            <Route exact path="/login">
           
-          </Route>
-          <Route path="/register">
-          </Route>
-          <Route path="/cities">
-          
-          </Route>
-        </Switch>
-      </Router>
+            </Route>
+            <Route exact path="/register">
+            </Route>
+            <Route exact path="/cities">
+              <Cities></Cities>
+            </Route>
+          </Switch>
+        </Router>
+      </Provider>
     );
   }
 }
