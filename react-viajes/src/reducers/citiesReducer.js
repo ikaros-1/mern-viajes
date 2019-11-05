@@ -7,11 +7,14 @@ const initialState={
 export default function(state=initialState,action) {
   switch (action.type) {
     case GET_CITIES:
-        ...state
+        return Object.assign({},state,{
+          cities:action.cities
+        })
       break;
-  
     default:
-        state
+        return{
+          state
+        }
       break;
   }
 }
