@@ -16,22 +16,24 @@ class Cities extends Component{
       var datos=[]
         if(this.props.cities!= null)
         for(var i=0;i<this.props.cities.length;i++){
-          datos.push(<li key={i}>{this.props.cities[i].name + " " + this.props.cities[i].country }</li>)
+          datos.push(<div className="imgbox mt-2 mb-2"><img key={i} src={'/image/image-city/' + this.props.cities[i].image}></img><span className="city-text">{this.props.cities[i].name }</span></div>)
         }
         console.log(datos)
         console.log(this.props.cities)
         return datos;
     }
     return(
-      <React.Fragment className="d-flex flex-row">
+      <div className="d-flex flex-column">
         <Header></Header>
-        <ol>
-          {city()}
-        </ol>
+        <div className="overflow-auto div-city d-flex flex-column align-items-center">
+          
+            {city()}
+          
+        </div>
         <div className="d-flex align-items-center flex-column">
           <img className="homeimg " src="/image/home.png"></img>
         </div>
-      </React.Fragment>
+      </div>
     )
   }
 }

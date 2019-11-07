@@ -4,10 +4,11 @@ const mongoose = require('mongoose')
 const cities = require('./model/cities')
 const app =express();
 const cors = require('cors')
+const bodyParser = require('body-parser');
 
 
 app.use(cors());
-
+app.use(bodyParser.json());
 
 app.get("/",(req,res)=>res.json({resputas:"Hello node"}));
 
