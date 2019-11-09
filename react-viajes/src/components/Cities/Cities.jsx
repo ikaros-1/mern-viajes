@@ -49,9 +49,7 @@ class Cities extends Component{
           <input className="w-100 pr-4" type="text" onChange={this.filterCity.bind(this)}></input>
         </div>
         <div className="overflow-auto div-city d-flex flex-column align-items-center">
-          
             {city()}
-          
         </div>
         <Link className="mt-1" to="/">
         <div className="d-flex align-items-center flex-column">
