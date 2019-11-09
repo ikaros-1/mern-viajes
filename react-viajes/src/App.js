@@ -13,9 +13,7 @@ class App extends Component {
       <Provider store={store}>
         <Router>
           <Switch>
-            <Route exact path="/">
-              <Home></Home>
-            </Route>
+            
             <Route exact path="/login">
           
             </Route>
@@ -23,6 +21,9 @@ class App extends Component {
             </Route>
             <Route exact path="/cities">
               <Cities></Cities>
+            </Route>
+            <Route path="/">
+              <Home></Home>
             </Route>
           </Switch>
         </Router>

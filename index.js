@@ -28,3 +28,9 @@ app.get("/cities/all",(req,res)=>
     .catch((err)=>res.json(err))
   );
 
+app.get("/cities/:name",(req,res)=>
+  cities.find({name: req.param.name})
+    .then((cities)=>(res.json(cities)))
+    .catch((err)=>res.json(err))
+  );
+
