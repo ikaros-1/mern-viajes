@@ -1,7 +1,7 @@
 const express = require('express')
 //const database = require('./database')
 const mongoose = require('mongoose')
-const cities = require('./model/cities')
+const cities = require('./model/City')
 const app =express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
@@ -14,7 +14,7 @@ app.get("/",(req,res)=>res.json({resputas:"Hello node"}));
 
 app.listen(8080,()=>console.log("inicio node"));
 
-mongoose.connect("mongodb+srv://matias:hola@cluster0-7eb5p.gcp.mongodb.net/mern?retryWrites=true&w=majority",{ useNewUrlParser: true })
+mongoose.connect("mongodb+srv://matias:hola@cluster0-7eb5p.gcp.mongodb.net/mern?retryWrites=true&w=majority",{ useNewUrlParser: true,useUnifiedTopology: true })
 .then(()=>{
   console.log('Database connection successful')
 })
@@ -29,8 +29,13 @@ app.get("/cities/all",(req,res)=>
   );
 
 app.get("/cities/:name",(req,res)=>
-  cities.find({name: req.param.name})
+  cities.find({name: req.params.name})
     .then((cities)=>(res.json(cities)))
     .catch((err)=>res.json(err))
   );
 
+app.get("/itinerary/:name",(req,res)=>
+  cities.find({name: req.params.name})
+    .then((itinerary)=>(res.send(itinerary[0].country)))
+    .catch((err)=>res.json(err))
+  );
