@@ -8,7 +8,8 @@ let ItinerarySchema = new mongoose.Schema({
   price:Number,
   hashtags:Array,
   Activity:[mongoose.SchemaTypes.ObjectId],
-  Comment:[mongoose.SchemaTypes.ObjectId]
+  Comment:[mongoose.SchemaTypes.ObjectId],
+  City:Object
 })
 
 module.exports=mongoose.model('itinerary',ItinerarySchema);

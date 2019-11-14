@@ -25,6 +25,9 @@ class App extends Component {
             <Route path="/">
               <Home></Home>
             </Route>
+            <Route exact path="/cities/">
+              <Cities></Cities>
+            </Route>
           </Switch>
         </Router>
       </Provider>

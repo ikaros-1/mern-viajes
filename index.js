@@ -1,7 +1,10 @@
 const express = require('express')
+const fs = require('fs')
+const path= require('path')
 //const database = require('./database')
 const mongoose = require('mongoose')
 const cities = require('./model/City')
+const itinerary= require('./model/Itinerary')
 const app =express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
@@ -28,14 +31,43 @@ app.get("/cities/all",(req,res)=>
     .catch((err)=>res.json(err))
   );
 
-app.get("/cities/:name",(req,res)=>
-  cities.find({name: req.params.name})
-    .then((cities)=>(res.json(cities)))
+app.get("/cities/:name",(req,res)=>{
+    cities.findOne({name: req.params.name})
+    .then((cities)=>{
+      console.log(cities)
+      if(cities.itineraries==undefined ){
+        var obj={name:cities.name}
+        res.json(obj);
+        return true
+      }
+      var itineraries=[];
+      cities.itinerary.map((item)=>{
+        itinerary.findById(item.$id)
+        .then((ite)=>{itineraries.push(ite)
+        console.log(ite)
+        })
+        .catch((err)=>console.log(err))
+      }).then(()=>{
+        console.log(itineraries)
+        var obj={name:cities.name,itinerary:itineraries}
+        res.send(obj);
+        }
+      )
+    }
+    )
     .catch((err)=>res.json(err))
-  );
+});
 
 app.get("/itinerary/:name",(req,res)=>
-  cities.find({name: req.params.name})
-    .then((itinerary)=>(res.send(itinerary[0].country)))
-    .catch((err)=>res.json(err))
+  cities.find({name: req.params.name}).then((itinerary)=>(res.send(itinerary[0].country)))
   );
+
+//Recibe la carpeta y nombre de la foto y la entrega
+app.get("/image/:folder/:name",(req,res)=>{
+ var directoryPath = path.join(__dirname, 'image/'+req.params.folder);
+
+  fs.readFileSync(directoryPath)
+    .then((file)=>res.send(file))
+    .catch((err)=>res.json(err))
+
+});  
