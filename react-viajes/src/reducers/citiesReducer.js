@@ -1,4 +1,4 @@
-import { GET_CITIES } from "../actions/type";
+import { GET_CITIES,GET_CITY,GET_ACTIVITIES,GET_COMMITS } from "../actions/type";
 
 const initialState={
   cities:[]

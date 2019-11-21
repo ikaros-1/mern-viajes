@@ -3,22 +3,21 @@ import Header from "./Header"
 import {Link} from "react-router-dom"
 import { connect } from "react-redux";
 import { getJson } from "../../actions/citiesActions";
-import "./Cities.css"
+import "./Itinerary.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import ItemItinerary from "./ItemItinerary"
 
 
 class Cities extends Component{
   constructor(){
     super();
     this.state={
-      CitiesFiltered:[]
+      expand:false
     }
   }
   
   componentDidMount(){
-    this.props.dispatch(getJson())
-    setTimeout(()=>this.setState({CitiesFiltered:this.props.cities}),200
-    )
+    
   }
 
   filterCity(event){
@@ -33,7 +32,7 @@ class Cities extends Component{
   }
 
   render(){
-    var city=()=>{
+    var itinerary=()=>{
       var datos=[]
         if(this.state.CitiesFiltered!= null)
         for(var i=0;i<this.state.CitiesFiltered.length;i++){
@@ -44,13 +43,15 @@ class Cities extends Component{
     return(
       <div className="d-flex flex-column">
         <Header></Header>
-        <div className="mr-4 pl-3 pb-2 ml-4 pr-5">
-          <h4>Find our cities</h4>
-          <input className="w-100 pr-4" type="text" onChange={this.filterCity.bind(this)}></input>
-        </div>
+        {!this.expand ?(
+        <div className="imgbox mt-2 mb-2"> <img src={'/image/image-city/' + this.state.city}></img><span className="city-text">{this.state.city }</span></div>
         <div className="overflow-auto div-city d-flex flex-column align-items-center">
-            {city()}
+            {itinerary()}
+        </div>) :
+        <div>
+          <ItemItinerary></ItemItinerary>
         </div>
+        }
         <Link className="mt-1" to="/">
         <div className="d-flex align-items-center flex-column">
           <img className="homeimg" src="/image/home.png" ></img>
@@ -61,7 +62,7 @@ class Cities extends Component{
 }
 
 const mapStateToProps = (state) =>({
-  cities:state.cities.cities
+  city:state.city
 });
 
 export default connect(mapStateToProps)(Cities);

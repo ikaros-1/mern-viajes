@@ -33,41 +33,23 @@ app.get("/cities/all",(req,res)=>
 
 app.get("/cities/:name",(req,res)=>{
     cities.findOne({name: req.params.name})
-    .then((cities)=>{
-      console.log(cities)
-      if(cities.itineraries==undefined ){
-        var obj={name:cities.name}
-        res.json(obj);
-        return true
-      }
-      var itineraries=[];
-      cities.itinerary.map((item)=>{
-        itinerary.findById(item.$id)
-        .then((ite)=>{itineraries.push(ite)
-        console.log(ite)
-        })
-        .catch((err)=>console.log(err))
-      }).then(()=>{
-        console.log(itineraries)
-        var obj={name:cities.name,itinerary:itineraries}
-        res.send(obj);
-        }
-      )
-    }
-    )
-    .catch((err)=>res.json(err))
+    .populate("itineraries")
+    .then((city)=>{
+      console.log(city)
+      res.json(city)
+    })
 });
-
-app.get("/itinerary/:name",(req,res)=>
-  cities.find({name: req.params.name}).then((itinerary)=>(res.send(itinerary[0].country)))
-  );
 
 //Recibe la carpeta y nombre de la foto y la entrega
 app.get("/image/:folder/:name",(req,res)=>{
- var directoryPath = path.join(__dirname, 'image/'+req.params.folder);
-
-  fs.readFileSync(directoryPath)
-    .then((file)=>res.send(file))
-    .catch((err)=>res.json(err))
-
+  fs.readFile('./image'+'/'+req.params.folder+'/'+req.params.name,(err,data)=>{
+    res.writeHead(200,'Content-Type', 'image/jpeg')
+    res.end(data)
+  })
+});  
+app.get("/image/:name",(req,res)=>{
+  fs.readFile('./image'+'/'+req.params.name,(err,data)=>{
+    res.writeHead(200,'Content-Type', 'image/jpeg')
+    res.end(data)
+  })
 });  
