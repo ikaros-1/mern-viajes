@@ -1,4 +1,4 @@
-import { GET_CITIES,GET_CITY,GET_ACTIVITIES,GET_COMMITS } from "../actions/type";
+import { GET_CITIES } from "../actions/type";
 
 const initialState={
   cities:[]
@@ -9,12 +9,10 @@ export default function(state=initialState,action) {
     case GET_CITIES:
         return Object.assign({},state,{
           cities:action.cities
-        })
-      break;
+        });
+      
     default:
-        return{
-          state
-        }
-      break;
+        return state;
+      
   }
 }

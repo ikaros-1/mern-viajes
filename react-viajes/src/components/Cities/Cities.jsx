@@ -22,12 +22,10 @@ class Cities extends Component{
   }
 
   filterCity(event){
-    console.log(this.props)
-    console.log(event.target.value)
-    if(event.target.value == "")
+    if(event.target.value === "")
       this.setState({CitiesFiltered:this.props.cities})
     else{
-      let cities=this.props.cities.filter((city)=>{return city.name.toLowerCase().indexOf(event.target.value.toLowerCase())>-1||city.country.toLowerCase().indexOf(event.target.value.toLowerCase())>-1 })
+      let cities=this.props.cities.filter((city)=>{return city.name.toLowerCase().indexOf(event.target.value.toLowerCase())>-1 || city.country.toLowerCase().indexOf(event.target.value.toLowerCase())>-1 })
       this.setState({CitiesFiltered:cities})
     }
   }

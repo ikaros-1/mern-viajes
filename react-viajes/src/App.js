@@ -20,10 +20,11 @@ class App extends Component {
             </Route>
             <Route exact path="/register">
             </Route>
-            <Route exact path="/cities">
+            <Route exact path="/cities/">
               <Cities></Cities>
             </Route>
-            <Route path="/cities/:name" Component={Itinerary}/>
+            <Route path="/cities/:name" component={Itinerary}>
+            </Route>
             <Route path="/">
               <Home></Home>
             </Route>

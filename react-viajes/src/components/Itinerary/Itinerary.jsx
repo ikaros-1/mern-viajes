@@ -1,68 +1,63 @@
-import React,{ Component  } from "react";
+import React, { Component } from "react";
 import Header from "./Header"
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom"
 import { connect } from "react-redux";
-import { getJson } from "../../actions/citiesActions";
 import "./Itinerary.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import ItemItinerary from "./ItemItinerary"
+import { getCity } from "./../../actions/itinerariesActions"
 
-
-class Cities extends Component{
-  constructor(){
-    super();
-    this.state={
-      expand:false
-    }
-  }
+class Itinerary extends Component {
   
-  componentDidMount(){
+  componentDidMount() {
     
+    this.props.dispatch(getCity(this.props.match.params.name))
   }
 
-  filterCity(event){
-    console.log(this.props)
-    console.log(event.target.value)
-    if(event.target.value == "")
-      this.setState({CitiesFiltered:this.props.cities})
-    else{
-      let cities=this.props.cities.filter((city)=>{return city.name.toLowerCase().indexOf(event.target.value.toLowerCase())>-1||city.country.toLowerCase().indexOf(event.target.value.toLowerCase())>-1 })
-      this.setState({CitiesFiltered:cities})
-    }
-  }
-
-  render(){
-    var itinerary=()=>{
-      var datos=[]
-        if(this.state.CitiesFiltered!= null)
-        for(var i=0;i<this.state.CitiesFiltered.length;i++){
-          datos.push(<div key={i} className="imgbox mt-2 mb-2"><img  src={'/image/image-city/' + this.state.CitiesFiltered[i].image}></img><span className="city-text">{this.state.CitiesFiltered[i].name }</span></div>)
+  render() {
+    var itinerary = () => {
+      var datos = []
+      if (this.props.city != undefined)
+        for (var i = 0; i < this.props.city.itineraries.length; i++) {
+          datos.push(<div key={i} className="imgbox mt-2 mb-2">
+            <div><img></img><span></span></div>
+            <div></div>
+            <div></div>
+          </div>)
         }
-        return datos;
+      return datos;
     }
-    return(
+    return (
       <div className="d-flex flex-column">
         <Header></Header>
-        {!this.expand ?(
-        <div className="imgbox mt-2 mb-2"> <img src={'/image/image-city/' + this.state.city}></img><span className="city-text">{this.state.city }</span></div>
-        <div className="overflow-auto div-city d-flex flex-column align-items-center">
-            {itinerary()}
-        </div>) :
-        <div>
-          <ItemItinerary></ItemItinerary>
+        <div className="imgbox ">
+          <img src={this.props.city===undefined? "" : this.props.city.image}></img>
+          <span className="city-text">{this.props.city===undefined? "" : this.props.city.name}</span>
         </div>
+        {!this.expand ?
+
+          <div className="overflow-auto div-city d-flex flex-column align-items-center">
+            {itinerary()}
+          </div>
+          :
+          <div>
+            <ItemItinerary></ItemItinerary>
+          </div>
         }
-        <Link className="mt-1" to="/">
-        <div className="d-flex align-items-center flex-column">
-          <img className="homeimg" src="/image/home.png" ></img>
-        </div></Link>
+        
+          <div className="d-flex justify-content-around foot flex-row mb-1">
+          <Link className="homeimg" to="/"><img className="w-100" src="/image/home.png" ></img></Link>
+          <Link className="homeimg" to="/"><img className="w-100" src="/image/home.png" ></img></Link>
+          <Link className="homeimg" to="/"><img className="w-100" src="/image/home.png" ></img></Link>
+          </div>
       </div>
     )
   }
 }
 
-const mapStateToProps = (state) =>({
-  city:state.city
+const mapStateToProps = (state) => ({
+  city: state.itineraries.city,
+  itinerary: state.itineraries.itinerary
 });
 
-export default connect(mapStateToProps)(Cities);
+export default connect(mapStateToProps)(Itinerary);
