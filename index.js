@@ -56,7 +56,6 @@ app.get("/cities/:name", (req, res) => {
   cities.findOne({ name: req.params.name })
     .populate("itineraries")
     .then((city) => {
-      console.log(city)
       res.json(city)
     })
 });

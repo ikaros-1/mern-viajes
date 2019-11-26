@@ -35,7 +35,7 @@ class Cities extends Component{
       var datos=[]
         if(this.state.CitiesFiltered!= null)
         for(var i=0;i<this.state.CitiesFiltered.length;i++){
-          datos.push(<div key={i} className="imgbox mt-2 mb-2"><img  src={this.state.CitiesFiltered[i].image}></img><span className="city-text">{this.state.CitiesFiltered[i].name }</span></div>)
+          datos.push(<Link to={"/cities/"+this.state.CitiesFiltered[i].name} key={i} className="imgbox mt-2 mb-2"><img  src={this.state.CitiesFiltered[i].image}></img><span className="city-text">{this.state.CitiesFiltered[i].name }</span></Link>)
         }
         return datos;
     }
