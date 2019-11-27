@@ -60,6 +60,14 @@ app.get("/cities/:name", (req, res) => {
     })
 });
 
+
+app.get("/itinerary/:id",(req,res)=>{
+  itinerary.findById(req.params.id)
+  .then((itinerary)=>{
+    res.json(itinerary)
+  })
+})
+
 //Recibe la carpeta y nombre de la foto y la entrega
 app.get("/image/:folder/:name", (req, res) => {
   fs.readFile('./image' + '/' + req.params.folder + '/' + req.params.name, (err, data) => {

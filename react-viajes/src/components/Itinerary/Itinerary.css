@@ -5,10 +5,10 @@
 .foot{
   height: 10%;
 }
-.div-city{
+.div-itineraries{
   height: 400px;
 }
-.imgbox{
+.tittlebox{
   height: 80px;
   width: 100%;
   
@@ -41,7 +41,7 @@
   
 }
 
-.imgbox img{
+.tittlebox img{
   object-fit: cover;
   border-color: grey;
   border-style: solid;
@@ -64,7 +64,7 @@
   border: 5px 5px 5px 5px;
   border-color: silver;
   border-radius: 5px ;
-  height: 40%;
+  height: 37%;
   box-shadow: inset -3px -2px 6px black, -3px -2px 3px slategrey; 
 }
 .expand{
@@ -79,4 +79,12 @@
 .text{
   color: cyan;
   font-size: 12px;
+}
+.div-itinerary{
+  height: 400px!important;
+  border-style: solid;
+  border: 5px;
+  border-color: silver;
+  border-radius: 5px ;
+  box-shadow: inset -3px -2px 6px black, -3px -2px 3px slategrey; 
 }

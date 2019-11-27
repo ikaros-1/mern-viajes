@@ -21,5 +21,5 @@ function City(json) {
   }
 }
 function Itinerary(json){
-    return{type:GET_ITINERARY,commits:json}
+    return{type:GET_ITINERARY,itinerary:json}
 }
