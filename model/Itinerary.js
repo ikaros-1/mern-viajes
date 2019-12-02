@@ -7,8 +7,7 @@ let ItinerarySchema = new mongoose.Schema({
   duration:Number,
   price:Number,
   hashtags:Array,
-  Activity:[mongoose.SchemaTypes.ObjectId],
-  Comment:[mongoose.SchemaTypes.ObjectId],
+  activities:[{type:mongoose.SchemaTypes.ObjectId}],
   City:Object
 })
 

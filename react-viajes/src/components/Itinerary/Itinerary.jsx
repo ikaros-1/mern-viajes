@@ -11,7 +11,8 @@ class Itinerary extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      expand: false
+      expand: false,
+      id:null
     }
   }
 
@@ -20,22 +21,22 @@ class Itinerary extends Component {
     this.props.dispatch(getCity(this.props.match.params.name))
   }
 
-  expandItinerary=(id,itineraries)=>{
-    this.props.dispatch(getItinerary(id))
-    this.setState({expand:true})
+  expandItinerary=(id)=>{
+    //this.setState({id:id})
+    this.setState({expand:true,id:id})
   }
   expandClose=()=>{
     this.setState({expand:false})
   }
 
   itinerary(){
-  if (this.props.city != undefined) {
+  if (this.props.city !== undefined) {
     
     var datos = this.props.city.itineraries.map((itineraries, i) =>
       <div key={i} className="w-100 mt-1 mb-1 row flex-wrap box pt-2 pb-2">
         <div className="w-100 d-flex m-0">
           <div className="w-25 d-flex flex-column flex-wrap align-items-center">
-            <img className="round" src={"http://localhost:8080/image/profilePic/" + itineraries.profilePic + ".png"}></img>
+            <img className="round" src={"http://localhost:8080/image/profilePic/" + itineraries.profilePic + ".png"} alt=""></img>
             <span className="text w-80 text-center"> {itineraries.profilePic} </span>
           </div>
           <div className="w-75 d-flex flex-column align-items-center">
@@ -50,7 +51,7 @@ class Itinerary extends Component {
             </div>
           </div>
         </div>
-        <div className="w-100 d-flex expand"  onClick={this.expandItinerary.bind(this,itineraries._id)}>
+        <div className="w-100 d-flex expand"  onClick={this.expandItinerary.bind(this,i)}>
           <span className="h5 link w-100 text-center ">v View All v</span>
         </div>
       </div>)
@@ -71,7 +72,7 @@ class Itinerary extends Component {
               {this.itinerary()}
               </div>
     else
-      return <ItemItinerary itinerary={this.props.itinerary} close={this.expandClose.bind(this)}></ItemItinerary>
+      return <ItemItinerary itinerary={this.props.city.itineraries[this.state.id]} close={this.expandClose.bind(this)}></ItemItinerary>
   }
 
 render() {
@@ -80,15 +81,15 @@ render() {
     <div className="d-flex flex-column">
       <Header></Header>
       <div className="tittlebox ">
-        <img src={this.props.city === undefined ? "" : this.props.city.image}></img>
+        <img src={this.props.city === undefined ? "" : this.props.city.image} alt=""></img>
         <span className="city-text">{this.props.city === undefined ? "" : this.props.city.name}</span>
       </div>
       <h4>Avaliable MYtineraries</h4>
       {this.setItinerary()}
       <div className="d-flex justify-content-around foot flex-row mb-1">
-        <img className="homeimg" src="/image/arrow-back.png" onClick={this.props.history.goBack}></img>
-        <Link className="homeimg" to="/"><img className="w-100" src="/image/home.png" ></img></Link>
-        <img className="homeimg"></img>
+        <img className="homeimg" src="/image/arrow-back.png" onClick={this.props.history.goBack} alt=""></img>
+        <Link className="homeimg" to="/"><img className="w-100" src="/image/home.png" alt=""></img></Link>
+        <img className="homeimg" alt=""></img>
       </div>
     </div>
   )

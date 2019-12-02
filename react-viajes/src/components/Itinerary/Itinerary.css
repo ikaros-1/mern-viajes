@@ -61,7 +61,7 @@
 
 .box{
   border-style: solid;
-  border: 5px 5px 5px 5px;
+  border: 5px;
   border-color: silver;
   border-radius: 5px ;
   height: 37%;
@@ -87,4 +87,13 @@
   border-color: silver;
   border-radius: 5px ;
   box-shadow: inset -3px -2px 6px black, -3px -2px 3px slategrey; 
+}
+.slider-activity{
+  height: 100px;
+}
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

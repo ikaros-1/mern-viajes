@@ -15,7 +15,9 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mongoose": "^5.7.7",
-    "mongoose-type-dbref": "^1.2.1"
+    "mongoose-type-dbref": "^1.2.1",
+    "react-slick": "^0.25.2",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "nodemon": "^1.19.4",

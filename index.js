@@ -8,7 +8,7 @@ const itinerary = require('./model/Itinerary')
 const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser');
-
+const activity= require('./model/Activity')
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -54,7 +54,10 @@ app.post("/cities/", (req, res) => {
 
 app.get("/cities/:name", (req, res) => {
   cities.findOne({ name: req.params.name })
-    .populate("itineraries")
+    .populate({
+      path:"itineraries"
+      ,populate:{path:"activities",model:"activity"}
+    })
     .then((city) => {
       res.json(city)
     })
