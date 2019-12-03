@@ -37,12 +37,12 @@ render() {
   var itineraries=this.props.itinerary;
   var items=itineraries.activities.map((act,i)=>
     <div onClick={this.setCommit.bind(this,i)}>
-      <img src={"https://localhost:8080/image/activites/"+act.Img}  alt=""></img>
+      <img src={"https://localhost:8080/image/activities/"+act.Img}  alt=""></img>
       <div className="centered">{act.Tittle}</div>
     </div>
     )
 
-  if(itineraries!=undefined)
+  if(itineraries!==undefined)
   return (
     <div className="div-itinerary d-flex flex-column ml-1">
       <div className="w-100 d-flex mt-3 mb-3">

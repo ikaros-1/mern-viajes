@@ -34,3 +34,12 @@
 h5{
   font-size: 18px;
 }
+.div-form{
+  height: 520px;
+}
+.box-red{
+  border: 1px black;
+  border-style: solid;
+  width: 200px;
+  height: 50px;
+}

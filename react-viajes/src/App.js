@@ -7,6 +7,8 @@ import Cities from './components/Cities/Cities';
 import Itinerary from './components/Itinerary/Itinerary'
 import { Provider } from "react-redux";
 import store from "./store";
+import Login from "./components/Login/Login"
+import SignUp from "./components/SignUp/SignUp"
 
 class App extends Component {
   render() {
@@ -15,16 +17,15 @@ class App extends Component {
         <Router>
           <Switch>
             
-            <Route exact path="/login">
-          
+            <Route exact path="/login" component={Login}>
             </Route>
-            <Route exact path="/register">
+            <Route exact path="/register" component={SignUp}>
             </Route>
             <Route exact path="/cities/">
               <Cities></Cities>
-            </Route>
+            </Route>            
             <Route path="/cities/:name" component={Itinerary}>
-            </Route>
+            </Route>            
             <Route path="/">
               <Home></Home>
             </Route>

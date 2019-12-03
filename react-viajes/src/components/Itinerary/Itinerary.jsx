@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import "./Itinerary.css"
 import 'bootstrap/dist/css/bootstrap.css';
 import ItemItinerary from "./ItemItinerary"
-import { getCity,getItinerary } from "./../../actions/itinerariesActions"
+import { getCity } from "./../../actions/itinerariesActions"
 
 class Itinerary extends Component {
   constructor(props) {

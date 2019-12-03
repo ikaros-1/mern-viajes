@@ -1,5 +1,5 @@
 let mongoose = require('mongoose');
-
+let db= require("./keys").mongoURI;
 const server = '127.0.0.1:27017'; // REPLACE WITH YOUR DB SERVER
 const database = 'fcc-Mail';      // REPLACE WITH YOUR DB NAME
 
@@ -9,7 +9,7 @@ class Database {
   }
   
 _connect() {
-     mongoose.connect('mongodb://matias:hola@cluster0-7eb5p.gcp.mongodb.net/test?retryWrites=true&w=majority')
+     mongoose.connect(db,{useNewUrlParser:true,useUnifiedTopology:true})
        .then(() => {
          console.log('Database connection successful')
        })

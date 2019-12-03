@@ -1,5 +1,4 @@
 let mongoose = require('mongoose');
-require('mongoose-type-dbref');
 let citiesSchema = new mongoose.Schema({
   name:String,
   country:String,

@@ -3,80 +3,81 @@ import Header from "./Header"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.css';
-import ItemItinerary from "./ItemItinerary"
-import { getCity, getItinerary } from "../../actions/itinerariesActions"
-
+import { Col, Row, Form, Button } from "react-bootstrap";
 class SignUp extends Component {
 
-
+    CreateUser() {
+        console.log("hola")
+    }
 
     render() {
 
         return (
             <div className="d-flex flex-column">
                 <Header></Header>
-                <div className="div-form">
+                <div className="div-form ml-2">
                     <h2>Create Account</h2>
                     <div></div>
-                    <Form>
+                    <Form className="ml-1">
                         <Form.Group as={Row} controlId="formPlaintextUser">
-                            <Form.Label column sm="2">
+                            <Form.Label column xs="3">
                                 Username
                             </Form.Label>
-                            <Col sm="10">
+                            <Col xs="8">
                                 <Form.Control />
                             </Col>
                         </Form.Group>
 
                         <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
+                            <Form.Label column xs="3">
                                 Password
                             </Form.Label>
-                            <Col sm="10">
+                            <Col xs="8">
                                 <Form.Control type="password" />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formPlaintextEmail">
-                            <Form.Label column sm="2">
+                            <Form.Label column xs="3">
                                 Email
                             </Form.Label>
-                            <Col sm="10">
+                            <Col xs="8">
                                 <Form.Control type="email" />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formPlaintextFirst">
-                            <Form.Label column sm="2">
-                                First name
-                            </Form.Label>
-                            <Col sm="10">
+                            <Form.Label column xs="3" className="pr-1">First name </Form.Label>
+                            <Col xs="8">
                                 <Form.Control />
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formPlaintextLast">
-                            <Form.Label column sm="2">
+                            <Form.Label column xs="3" className="pr-1">
                                 Last name
                             </Form.Label>
-                            <Col sm="10">
+                            <Col xs="8">
                                 <Form.Control />
                             </Col>
                         </Form.Group>
-                        <Form.Group as={Col} controlId="formGridState">
-                            <Form.Label column sm="2">State</Form.Label>
-                            <Form.Control as="select">
-                                <option>Choose...</option>
-                                <option>Canada</option>
-                                <option>Argentina</option>
-                            </Form.Control>
+                        <Form.Group as={Row} controlId="formGridState">
+                            <Form.Label column xs="3">State</Form.Label>
+                            <Col xs="5">
+                                <Form.Control as="select" >
+                                    <option>Choose...</option>
+                                    <option>Canada</option>
+                                    <option>Argentina</option>
+                                </Form.Control>
+                            </Col>
                         </Form.Group>
                         <Form.Group id="formGridCheckbox">
                             <Form.Check type="checkbox" label={
-                            <span>I agree to MYtinerary's <a >Terms & Conditions</a></span>
+                                <span>I agree to MYtinerary's <a>Terms & Conditions</a></span>
                             } />
                         </Form.Group>
-
-                        <Button variant="primary" type="submit">
-                            Submit
-                        </Button>
+                        <Row className="justify-content-center">
+                            <Button variant="primary" type="submit" onClick={this.CreateUser}>
+                                Submit
+                            </Button>
+                        </Row>
                     </Form>
                 </div>
                 <div className="d-flex justify-content-around foot flex-row mb-1">
@@ -89,4 +90,4 @@ class SignUp extends Component {
     }
 }
 
-export default connect(Login);
+export default connect()(SignUp);
