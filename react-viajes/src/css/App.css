@@ -43,3 +43,24 @@ h5{
   width: 200px;
   height: 50px;
 }
+.foto{
+  border-radius: 50%;
+  border: 1px black;
+  border-style: solid;
+  height: 80px;
+  width: 80px;
+  align-self: center;
+  overflow: hidden;
+  color: transparent;
+  background-color: white;
+  background-size: contain;
+}
+.form-group{
+  margin-bottom: 0.5rem!important;
+}
+#file{
+  color: transparent;
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+}

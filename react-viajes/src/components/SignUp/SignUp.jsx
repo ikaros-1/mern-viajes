@@ -5,19 +5,45 @@ import { connect } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Form, Button } from "react-bootstrap";
 class SignUp extends Component {
+    
+    constructor(props){
+        super(props)
+        this.state = {
+            file: '',
+            imagePreviewUrl: ''
+          };
+        this.handleImage=this.handleImage.bind(this)
+    }
 
-    CreateUser() {
-        console.log("hola")
+    handleImage(e){
+        e.preventDefault();
+        let reader = new FileReader();
+        let file = e.target.files[0];
+        let that=this;
+        reader.onloadend = () => {
+            console.log()
+            that.setState({
+              file: file,
+              imagePreviewUrl: reader.result
+            });
+        }
+        reader.readAsDataURL(file)
     }
 
     render() {
-
+        var {imagePreviewUrl}=this.state        
+        var image=""
+        if(imagePreviewUrl){
+            image=imagePreviewUrl
+        }
         return (
             <div className="d-flex flex-column">
                 <Header></Header>
-                <div className="div-form ml-2">
+                <div className="div-form ml-2 d-flex flex-column">
                     <h2>Create Account</h2>
-                    <div></div>
+                    <div className="foto mb-3 mt-2" style={{backgroundImage: "url("+image+")"}}   >
+                        <input id="file" className="custom-file-input" accept="image/*" type="file" onChange={this.handleImage}/>
+                    </div>
                     <Form className="ml-1">
                         <Form.Group as={Row} controlId="formPlaintextUser">
                             <Form.Label column xs="3">

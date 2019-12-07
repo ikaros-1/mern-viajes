@@ -13,6 +13,7 @@ const sharp = require("sharp");
 const storage= require("./upload.config")
 const upload = multer(storage);
 const path = require('path')
+const passport=require("passport")
 
 app.get("/cities/", (req, res) =>
   cities.find()
@@ -86,7 +87,7 @@ app.get("/image/:name", (req, res) => {
   })
 });
 
-app.post("/image/user/:name", upload.single('image'), async (req, res) => {
+app.post("/image/user/:name", multer({ dest: './public/uploads/'}).single('file'), async (req, res) => {
 
   //const { filename: image } = req.file
 
@@ -104,7 +105,7 @@ app.post("/image/user/:name", upload.single('image'), async (req, res) => {
 
 //Autenticacion y Creacion de usuarios
 
-app.post("/user", (req, res) => {
+app.post("/user",passport.authenticate("jwt", { session: false }), (req, res) => {
   var username = req.body.username;
   var email = req.body.email;
   var password = "";
@@ -144,7 +145,7 @@ app.post("/user", (req, res) => {
   });
 })
 
-app.post("/login", (req, res) => {
+app.post("/login",passport.authenticate("jwt", { session: false }), (req, res) => {
 
   var validate = user.valideLogin({ username: req.body.username, password: body.password });
 
@@ -158,7 +159,7 @@ app.post("/login", (req, res) => {
 
       bcrypt.compare(req.body.password, user.password).then(isMatch => {
         if (isMatch) {
-          const payload = { username: user.username }
+          const payload = { id: user._id }
           jwt.sign(payload,
             keys.secretOrKey,
             { expiresIn: 2592000 },
