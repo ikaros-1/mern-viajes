@@ -2,7 +2,9 @@ const fs = require('fs');
 const cities = require('./model/City');
 const itinerary = require('./model/Itinerary');
 const activity = require('./model/Activity');
-const user = require('./model/User');
+const user = require('./model/User').user;
+const uservalidate = require('./model/User').schema;
+const loginvalidate = require('./model/User').valideLogin;
 var express = require('express');
 var app = express.Router();
 const bcrypt = require('bcryptjs');
@@ -15,11 +17,16 @@ const upload = multer(storage);
 const path = require('path');
 const passport = require('passport');
 
-app.get('/cities/', (req, res) =>
-  cities
-    .find()
-    .then(cities => res.json(cities))
-    .catch(err => res.json(err))
+app.get(
+  '/cities/',
+  passport.authenticate('jwt', {
+    failureRedirect: 'http://localhost:3000/login'
+  }),
+  (req, res) =>
+    cities
+      .find()
+      .then(cities => res.json(cities))
+      .catch(err => res.json(err))
 );
 app.post('/cities/', (req, res) => {
   if (cities.exists({ name: req.body.name }))
@@ -107,117 +114,127 @@ app.post('/image/user/:name', upload.single('file'), async (req, res) => {
 
 //Autenticacion y Creacion de usuarios
 
-app.post('/user', async (req, res) => {
+app.post('/user', async function(req, res) {
   var username = req.body.username;
   var email = req.body.email;
   var password = '';
-  const validate = await user.schema.validateAsync({
+
+  const validate = await uservalidate({
     username: username,
     password: req.body.password,
     email: email,
     firstname: req.body.firstname,
     lastname: req.body.lastname
   });
-  console.log(validate);
 
-  if (validate.error) {
-    res
+  if (validate.err) {
+    console.log('err');
+    return res
       .status(400)
-      .send(validate.error)
+      .send(validate.err.details[0].message)
       .end();
-  }
-  /* (err, user) => {
-      if (err) {
-        res
-          .status(400)
-          .send(validator.error)
-          .end();
-      }
-      user
-        .count({ $or: [{ username: username }, { email: email }] })
-        .then(count => {
-          if (count > 0)
-            return res
-              .status(400)
-              .send('El usuario o email ya estan registrados')
-              .end();
-        })
-        .catch(err => {
-          console.log('error en servidor' + err);
+  } else {
+    user
+      .count({ $or: [{ username: username }, { email: email }] })
+      .then(count => {
+        if (count > 0) {
           return res
             .status(400)
-            .send('Error en la base de datos')
+            .send('El usuario o email ya estan registrados')
             .end();
-        });
-      bcrypt.genSalt(10, function(err, salt) {
-        bcrypt.hash(req.body.password, salt, function(err, hash) {
-          if (err) throw err;
-          const newUser = new user({
-            username: username,
-            password: hash,
-            email: email,
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
-            img: req.body.img
-          });
-          newUser
-            .then(_user => {
-              res.json(_user);
-            })
-            .catch(err => {
-              console.log('error en el guardado del usuario' + err);
-              return res.send('Error en el cargar la info al servidor').end();
-            });
-        });
-      });
-    }
-  );*/
-});
-app.post(
-  '/login',
-  passport.authenticate('jwt', { session: false }),
-  (req, res) => {
-    var validate = user.valideLogin({
-      username: req.body.username,
-      password: body.password
-    });
-
-    if (validate.error != undefined)
-      return res
-        .status(400)
-        .send(validate.error)
-        .end();
-
-    user.findOne({ email: req.body.username }).then(user => {
-      if (!user) return res.status(404).json({ error: 'User not found' });
-
-      bcrypt.compare(req.body.password, user.password).then(isMatch => {
-        if (isMatch) {
-          const payload = { id: user._id };
-          jwt.sign(
-            payload,
-            keys.secretOrKey,
-            { expiresIn: 2592000 },
-            (err, token) => {
-              if (err) {
-                res.status(400).json({
-                  success: false,
-                  token: 'Error en la generacion de token'
-                });
-              } else {
-                res.status(200).json({
-                  success: true,
-                  token: token
-                });
-              }
-            }
-          );
         } else {
-          return res.status(404).json({ error: 'Password Incorrect' });
+          bcrypt.genSalt(10, function(err, salt) {
+            bcrypt.hash(req.body.password, salt, function(err, hash) {
+              if (err) throw err;
+              const newUser = new user({
+                username: username,
+                password: hash,
+                email: email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                img: req.body.img
+              });
+              newUser
+                .save()
+                .then(_user => {
+                  res.json({ user: _user.username, email: _user.email });
+                })
+                .catch(err => {
+                  console.log('error en el guardado del usuario' + err);
+                  return res
+                    .status(400)
+                    .send('Error en el cargar la info al servidor');
+                });
+            });
+          });
         }
+      })
+      .catch(err => {
+        console.log('error en servidor' + err);
+        return res
+          .status(400)
+          .send('Error en la base de datos')
+          .end();
       });
-    });
   }
-);
+});
+
+app.post('/login', (req, res) => {
+  var validate = loginvalidate({
+    username: req.body.username,
+    password: req.body.password
+  });
+
+  if (validate.err) {
+    console.log('hola');
+    return res
+      .status(400)
+      .send(validate.err.details[0].message)
+      .end();
+  } else {
+    user
+      .findOne({ username: req.body.username })
+      .then(user => {
+        if (!user)
+          return res
+            .status(404)
+            .json({ error: 'User not found' })
+            .end();
+        else {
+          bcrypt.compare(req.body.password, user.password).then(isMatch => {
+            if (isMatch) {
+              const payload = { id: user._id };
+              jwt.sign(
+                payload,
+                keys.secretOrKey,
+                { expiresIn: 2592000 },
+                (err, token) => {
+                  if (err) {
+                    res.status(400).json({
+                      success: false,
+                      token: 'Error en la generacion de token'
+                    });
+                  } else {
+                    res.status(200).json({
+                      success: true,
+                      token: token
+                    });
+                  }
+                }
+              );
+            } else {
+              return res.status(404).json({ error: 'Password Incorrect' });
+            }
+          });
+        }
+      })
+      .catch(err => {
+        return res
+          .status(500)
+          .send('error en el servidor')
+          .end();
+      });
+  }
+});
 
 module.exports.router = app;
