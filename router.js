@@ -124,7 +124,8 @@ app.post('/user', async function(req, res) {
     password: req.body.password,
     email: email,
     firstname: req.body.firstname,
-    lastname: req.body.lastname
+    lastname: req.body.lastname,
+    img: req.body.img
   });
 
   if (validate.err) {

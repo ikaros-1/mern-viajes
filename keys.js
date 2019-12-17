@@ -4,5 +4,6 @@ module.exports = {
   secretOrKey: 'secret',
   GOOGLE_CLIENT_ID:
     '447971889664-dk38vbppjdjl0fbgdk1ddaaa78k9fhru.apps.googleusercontent.com',
-  GOOGLE_CLIENT_SECRET: 'YSW8UQfpka46mmUUWEedFqgh'
+  GOOGLE_CLIENT_SECRET: 'YSW8UQfpka46mmUUWEedFqgh',
+  GOOGLE_CALLBACK: 'auth/google/callback'
 };

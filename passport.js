@@ -3,7 +3,6 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = require('./model/User').user;
-//const UserGoogle = mongoose.model('');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 const key = require('./keys');
 
@@ -24,17 +23,32 @@ module.exports = passport.use(
   })
 );
 
-/*module.exports = passport.use(
+module.exports = passport.use(
   new GoogleStrategy(
     {
       clientID: key.GOOGLE_CLIENT_ID,
       clientSecret: key.GOOGLE_CLIENT_SECRET,
-      callbackURL: 'auth/google/callback'
+      callbackURL: key.GOOGLE_CALLBACK
     },
     function(accessToken, refreshToken, profile, cb) {
-      User.findOrCreate({ googleId: profile.id }, function(err, user) {
-        return cb(err, user);
+      User.find({ googleId: profile.email }, function(err, user) {
+        if (err) return cb(err);
+        if (!user) {
+          const GoogleUser = new User({
+            username: profile.displayName,
+            email: profile.emails[0].value,
+            firstname: profile.name.givenName,
+            lastname: profile.name.familyName,
+            img: profile.photos[0].value
+          });
+          GoogleUser.save(function(err) {
+            if (err) return cb(err);
+            return cb(err, GoogleUser);
+          });
+        } else {
+          return cb(err, user);
+        }
       });
     }
   )
-);*/
+);
