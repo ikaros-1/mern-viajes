@@ -1,3 +1,8 @@
 export const GET_CITIES='GET_CITIES';
 export const GET_CITY='GET_CITIES';
 export const GET_ITINERARY='GET_ITINERARY';
+export const POST_REGISTRATION='POST_REGISTRATION';
+export const POST_TOKEN='POST_TOKEN';
+export const POST_USER='POST_USER';
+export const POST_PHOTO='POST_PHOTO';
+export const POST_GOOGLEUSER='POST_GOOGLEUSER';

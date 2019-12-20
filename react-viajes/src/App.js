@@ -26,8 +26,7 @@ class App extends Component {
             </Route>            
             <Route path="/cities/:name" component={Itinerary}>
             </Route>            
-            <Route path="/">
-              <Home></Home>
+            <Route path="/" component={Home}>
             </Route>
             
           </Switch>

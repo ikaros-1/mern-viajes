@@ -31,7 +31,7 @@ module.exports = passport.use(
       callbackURL: key.GOOGLE_CALLBACK
     },
     function(accessToken, refreshToken, profile, cb) {
-      User.find({ googleId: profile.email }, function(err, user) {
+      User.find({ email: profile.emails[0].value }, function(err, user) {
         if (err) return cb(err);
         if (!user) {
           const GoogleUser = new User({

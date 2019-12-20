@@ -4,6 +4,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux";
 import 'bootstrap/dist/css/bootstrap.css';
 import { Col, Row, Form, Button } from "react-bootstrap";
+import { GoogleLogin} from './../../actions/UserActions'
 class Login extends Component {
     render() {
         return (
@@ -38,11 +39,11 @@ class Login extends Component {
                             </Button>
                         </Row>
                     </Form>}
-                    <div className="d-flex flex-row box-red m-2 align-self-end mr-4">
+                    <a href="http://localhost:8080/auth/google"><div className="d-flex flex-row box-red m-2 align-self-end mr-4">
                         <img src="" alt=""></img>
                         <div>Log in with Google</div>
-                    </div>
-                    <div className="d-flex flex-row box-red m-2 align-self-end mr-4">
+                    </div></a>
+                    <div className="d-flex flex-row box-red m-2 align-self-end mr-4" onClick={this.props.dispatch(GoogleLogin())}>
                         <img src="" alt=""></img>
                         <div>Log in with Facebook</div>
                     </div>
